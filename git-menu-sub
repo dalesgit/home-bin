@@ -1,0 +1,90 @@
+#!/bin/bash
+# https://askubuntu.com/questions/1146166/bash-how-to-create-a-menu-with-submenu
+# submenu
+Repo="${menu[$option]}"
+function EchoRepo () {
+   echo "You have set this Rep" "$Repo"
+}
+function getStatus(){
+   cd $Repo
+   echo "Status for $Repo"
+   git status 
+   return
+}
+function gitPull(){
+   cd $Repo
+   git pull origin main
+   return
+}
+function gitAdd(){
+   cd $Repo
+   git add .
+   return
+}
+function gitCommit(){
+   cd $Repo
+   git commit -m "Lenovo update"
+   return
+}
+function gitPush(){
+   cd $Repo
+   git push origin main
+   return
+}
+submenu () {
+  local PS3='Please enter sub option: '
+  local options=("Set your Repo here" "Which Repo?" "getStatus" "gitPull" "gitAdd" "gitCommit" "gitPush" "Set Repo Submenu quit")
+  local opt
+  clear
+  select opt in "${options[@]}"
+  do
+      case $opt in
+          "Set your Repo here")
+              echo "Set your Repo here"
+              source ~/bin/bash-file-menu4
+              ;;
+           "Which Repo?")
+            EchoRepo
+                ;;
+            "getStatus")
+            getStatus
+            ;;
+            "gitPull")
+            gitPull
+            ;;
+            "gitAdd")
+            gitAdd
+            ;;
+            "gitCommit")
+            gitCommit
+            ;;
+            "gitPush")
+            gitPush
+            ;;
+           "Set Repo Submenu quit")
+              return
+              ;;
+          *) echo "invalid option $REPLY";;
+      esac
+ #     clear
+  done
+}
+
+# main menu
+PS3='Please enter main option: '
+options=("Git Menu" "Main menu quit")
+clear
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Git Menu")
+            submenu
+            ;;
+ 
+        "Main menu quit")
+            exit
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+ #   clear
+done

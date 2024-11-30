@@ -34,7 +34,7 @@ done
 #Repo=${menu[$option]}
 #echo "${Repo}"
 #echo "You said '$option' which is '${menu[$option]}'"
-#echo "You chosen '${menu[$option]}'"
-Repo=${menu[$option]}
+echo "You said '${menu[$option]}'"
 #Repo=${menu[$option]}
-echo "You have chosen" "$Repo"
+Repo=${menu[$option]}
+echo "$Repo"
