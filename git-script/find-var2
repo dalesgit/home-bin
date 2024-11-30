@@ -1,0 +1,8 @@
+#!/bin/sh
+capture="`yad --columns=2 \
+  --form --field="obs:TXT" "Abce and more" --field="obs2:TXT" "Mn and more" \
+  --field="pass 1:CHK" FALSE --field="pass 2:CHK" FALSE \
+  --field=Buton1:FBTN '' --field=boton2:FBTN '' \
+  --field=boton3:FBTN '' --field=boton4:FBTN ''`"
+bash-4.4# echo "$capture"
+Abce and more|Mn and more|FALSE|FALSE|||||

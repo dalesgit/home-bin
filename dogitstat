@@ -1,0 +1,6 @@
+#! /bin/bash
+# git status | yad --text-info --width 340
+git status | yad --text-info --wrap  --height=240 --width=640
+
+
+

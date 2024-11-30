@@ -1,0 +1,24 @@
+#!/bin/sh
+#https://forum.puppylinux.com/viewtopic.php?t=10069
+#Yad assign variables with BASH
+
+values=$(yad --form --width=400 --title=" " --text="Please enter your info:" --separator=' '  \
+--button=Skip:1 \
+--button=Apply:0 \
+--field="Username" \
+--field="Password" \ )
+
+return=$?
+echo $return #just shows us the value
+
+username="${values[0]}"
+password="${values[1]}"
+
+if [ $return == 0 ]; then
+    echo You entered:
+    echo $username
+    echo $password
+    exit
+fi
+
+exit

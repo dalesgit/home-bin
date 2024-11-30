@@ -1,0 +1,9 @@
+#!/bin/sh
+REPO=$(yad --form \
+  --field="Repository::"CB "/home/dale/Documents/logseq!/home/dale/Documents/obsidian!/home/dale/Documents/wiki-vim"\
+ # echo '$yad')
+)
+  VAR=$(echo $YAD_REPO | awk 'BEGIN {FS="," } { print $2 }')
+Repository="`echo $REPO | cut -d "|" -f 1`"
+echo $Repository
+# https://unix.stackexchange.com/questions/566953/parsing-variable-which-contains-vertical-bar

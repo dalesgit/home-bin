@@ -1,0 +1,103 @@
+#!/bin/bash
+#$ cat > menuui
+#
+# Script to create simple menus and take action according to that selected
+# menu item
+# function egs
+#
+function getRepo(){
+unset option menu ERROR      # prevent inheriting values from the shell
+declare -a menu              # create an array called $menu
+menu[0]=""                   # set and ignore index zero so we can count from 1
+
+while IFS= read -r line; do
+  menu[${#menu[@]}]="$line"  # push $line onto $menu[]
+#  options+=( "Quit" )
+done < ingestion.txt
+
+# function to show the menu
+menu() {
+  echo "Please select an option by typing in the corresponding number"
+  echo ""
+  for (( i=1; i<${#menu[@]}; i++ )); do
+  options+=( "Quit" )
+    echo "$i) ${menu[$i]}"
+  done
+  echo ""
+}
+
+# initial menu
+menu
+read option
+
+# loop until given a number with an associated menu item
+while ! [ "$option" -gt 0 ] 2>/dev/null || [ -z "${menu[$option]}" ]; do
+  echo "No such option '$option'" >&2  # output this to standard error
+  menu
+  read option
+done
+
+echo "You said '$option' which is '${menu[$option]}'"
+return
+}
+function getStatus(){
+   cd $Repo
+   echo "Status for $Repo"
+   git status 
+   return
+}
+function gitPull(){
+   cd $Repo
+   git pull origin main
+   return
+}
+function gitAdd(){
+   cd $Repo
+   git add .
+   return
+}
+function gitCommit(){
+   cd $Repo
+   git commit -m "Lenovo update"
+   return
+}
+function gitPush(){
+   cd $Repo
+   git push origin main
+   return
+}
+file=server.list
+if [ ! -e "$file" ]; then
+    echo "File does not exist"
+else 
+    echo "File exists"
+fi 
+while :
+ do
+    clear
+    echo "-------------------------------------"
+    echo " Main Menu "
+    echo "-------------------------------------"
+    echo "[1] Get Repo value"
+    echo "[2] Get Status"
+    echo "[3] gitPull"
+    echo "[4] gitAdd"
+    echo "[5] gitCommit"
+    echo "[6] gitPush"
+    echo "[9] Exit/Stop"
+    echo "======================="
+    echo -n "Enter your menu choice [1-8]: "
+    read yourch
+    case $yourch in
+      1) getRepo;getRepo ; read ;;
+      2) getStatus;getStatus; read ;;
+      3) gitPull;gitPull; read ;;
+      4) gitAdd;gitAdd; read ;;
+      5) gitCommit;gitCommit; read ;;
+      6) gitPush;gitPush; read ;;
+      9) exit 0 ;;
+      *) echo "Opps!!! Please select choice 1,2,3,4,5,6, or 9";
+         echo "Press a key. . ." ; read ;;
+ esac
+done
+

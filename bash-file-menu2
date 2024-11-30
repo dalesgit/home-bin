@@ -1,0 +1,30 @@
+#!/bin/bash
+# Bash Menu Script Example
+# https://unix.stackexchange.com/questions/574039/how-do-i-write-a-bash-menu-script-so-that-the-options-are-the-contents-of-a-list
+unset option menu ERROR      # prevent inheriting values from the shell
+declare -a menu              # create an array called $menu
+menu[0]=""                   # set and ignore index zero so we can count from 1
+
+PS3='Please enter your choice:  '
+mapfile -t options < ~/bin/ingestion.txt
+#options+=( "Quit" )
+#options=("Option 1" "Option 2" "Option 3" "Quit")
+options+=( "Quit" )
+select opt in "${options[@]}"
+do
+    case $opt in
+        "Option 1")
+            echo "you chose choice 1"
+            echo "$options"
+            ;;
+        "Option 2")
+            echo "you chose choice 2"
+            ;;
+        "Option 3")
+            echo "you chose choice 3"
+            ;;
+        "Quit")
+            break
+            ;;
+    esac
+done

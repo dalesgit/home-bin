@@ -1,0 +1,13 @@
+#!/bin/bash
+tempfile="$(mktemp)"
+while true; do
+#   Repo=$(dialog --menu 'Please select from the server list' 18 70 15 $(nl server.list) 2>"$tempfile" && break)
+    dialog --menu 'Please select from the server list' 18 70 15 $(nl server.list) 2>"$tempfile" && break
+done
+n="$(cat "$tempfile")"
+Repo="$(sed -n "${n}p" server.list)"
+rm "$tempfile"
+#echo "The user selected option number $n: '$value'"
+#dialog --msgbox "$Repo" 0 0
+#done
+ clear

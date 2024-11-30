@@ -1,0 +1,20 @@
+#!/bin/bash
+PS3="Select your language please: "
+
+select lng in /home/dale/Documents/logseq /home/dale/Documents/wiki-vim /home/dale/Documents/obsidian Quit
+do
+    case $lng in
+        "Bash")
+            echo "$lng;;
+        "Java")
+           echo "$lng";;
+        "C++")
+           echo "$lng";;
+        "Quit")
+           echo "We're done"
+           break;;
+        *)
+           echo "Ooops";;
+    esac
+done
+# https://www.baeldung.com/linux/shell-script-simple-select-menu

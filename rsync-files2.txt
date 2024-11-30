@@ -1,0 +1,12 @@
++ home/*/.ssh/***
++ home/*/.config/
++ home/*/.config/plank/***
++ home/*/.config/dconf/***
++ home/*/.config/Code/
++ home/*/.config/Code/User/
++ home/*/.config/Code/User/*.json
+
+# hide the rest ( .local, .wine, most of .config ...)
+- home/*/.*/
+# 'wipe' all the from above step-by-step subdirectories directories
+- home/*/.*/***

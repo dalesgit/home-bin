@@ -1,0 +1,130 @@
+#! /bin/bash
+
+# utilitymenu.sh - A sample shell script to display menus on screen
+# Store menu options selected by the user
+INPUT=/tmp/menu.sh.$$
+Editor='vim'
+# Storage file for displaying cal and date command output
+OUTPUT=/tmp/output.sh.$$
+
+# get text editor or fall back to vi_editor
+vi_editor=${EDITOR}
+
+# trap and delete temp files
+trap "rm $OUTPUT; rm $INPUT; exit" SIGHUP SIGINT SIGTERM
+
+#
+# Purpose - display output using msgbox 
+#  $1 -> set msgbox height
+#  $2 -> set msgbox width
+#  $3 -> set msgbox title
+#
+function do_Xresources(){
+xrdb -merge "./.Xresources"
+}
+function do_Ranger(){
+xterm -e ranger &
+}
+
+function do_Edit(){
+$Editor $BASH_SOURCE 
+}
+function do_abiword(){
+  abiword
+}
+
+
+function display_output(){
+	local h=${1-20}			# box height default 10
+	local w=${2-41} 		# box width default 41
+	local t=${3-Output} 	# box title 
+	dialog --backtitle "Dialog Menu" --title "${t}" --clear --msgbox "$(<$OUTPUT)" ${h} ${w}
+}
+
+#
+# Purpose - display current system date & time
+#
+
+function gitStatus(){
+	git status >$OUTPUT
+	display_output 6 60 "Git Status"
+}
+function show_date(){
+	echo "Today is $(date) @ $(hostname -f)." >$OUTPUT
+    display_output 6 60 "Date and Time"
+}
+#
+# Purpose - display a calendar
+#
+function do_apostrophe(){
+flatpak run org.gnome.gitlab.somas.Apostrophe
+	}
+function show_calendar(){
+dialog --calendar "Select a date" 0 0
+}
+#
+# set infinite loop
+#
+while true
+do
+
+### display main menu ###
+dialog --clear  --help-button --backtitle "Dialog Menu" \
+--title "[ M A I N - M E N U ]" \
+--menu "You can use the UP/DOWN arrow keys, the first letter of the choice \n\
+as a hot key, or the number keys 1-9 to choose an option.\n\
+Choose the TASK" 28 70 18 \
+Abricotine "Markdown editor" \
+B_Edit "Edit this file" \
+Calendar "Displays a calendar" \
+Date/time "Displays date and time" \
+Editor "Start a text editor" \
+F_fiXresources "Fix Xresources" \
+G_ranger "Ranger" \
+H_gitstats "Git Status" \
+I_Firefox "Firefox browser" \
+Joplin "Start Joplin" \
+K_gingko "Gingko standalone" \
+Librewriter "Librewriter" \
+Obsidian "Graphic-linked notes" \
+Pcloud "Start pCloudDrive" \
+R_dropbox_start "Dropbox Menu" \
+Sqlitestudio "Run sqlitestudio" \
+Zettlr "Markdown editor"  \
+Q_Exit "Exit to the shell" 2>"${INPUT}" 
+# Zettlr "Markdown editor" 2>"${INPUT}"
+
+
+
+menuitem=$(<"${INPUT}")
+
+
+# make decsion 
+case $menuitem in
+    Abricotine) abricotine;;
+    B_Edit) do_Edit;;
+	Calendar) show_calendar;;
+	Date/time) show_date;;
+	Editor) xterm -e vim &;;
+	F_fiXresources) do_Xresources;;
+	G_ranger) do_Ranger;;
+    H_gitstats) gitStatusq;;
+    I_Firefox) ~/firefox/firefox &;;
+	Joplin) do_joplin;;
+	K_gingko) do_Gingko;;
+    Librewriter) lowriter;;
+	Obsidian) /home/dale/bin/Obsidian-0.11.0.AppImage &;;
+    Pcloud) xterm -e /home/dale/bin/pcloudcc -u dhath12@gmail.com -d &  ;;
+	R_dropbox_start) dropbox_start;;
+	Sqlitestudio) runSqlitestudio;;
+	Zettlr) Zettlr &;;
+	Q_Exit) echo "clear screen"; clear; break  ;;
+esac
+# try to clear screen
+echo "clearing screen"
+done
+
+# if temp files found, delete em
+[ -f $OUTPUT ] && rm $OUTPUT
+[ -f $INPUT ] && rm $INPUT
+

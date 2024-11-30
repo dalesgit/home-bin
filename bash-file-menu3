@@ -1,0 +1,15 @@
+#!/bin/bash
+# Bash Menu Script Example
+# https://unix.stackexchange.com/questions/574039/how-do-i-write-a-bash-menu-script-so-that-the-options-are-the-contents-of-a-list
+readarray -t list < ingestion.txt
+
+PS3='Please enter your choice or 0 to exit: '
+select selection in "${list[@]}"; do
+    if [[ $REPLY == "0" ]]; then
+        echo 'Goodbye' >&2
+        exit
+    else
+       echo "This is $REPLY and this is the $selection"
+        # break
+    fi
+done

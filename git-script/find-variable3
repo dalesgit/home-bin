@@ -1,0 +1,6 @@
+#!/bin/sh
+name=$(yad --form \
+--separator=" " \
+  --field="Sex::"CB "Male!Female!Other"\
+  --field="Name::"CB "Dale!MaryPat!Other")
+  echo $name

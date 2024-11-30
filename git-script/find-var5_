@@ -1,0 +1,27 @@
+#!/bin/bash
+# Bash Menu Script Example
+PS3='Please enter your choice: '
+options=("/home/dale/Documents/logseq" "/home/dale/Documents/obsidiann" "/home/dale/Documents/Obsidian-library" "/home/dale/Documents/wiki-vim" "Quit")
+select opt in "${options[@]}"
+do
+    case $opt in
+        "/home/dale/Documents/logseq")
+            echo "you chose choice 1"
+            echo $opt
+            ;;
+        "/home/dale/Documents/obsidian")
+            echo "you chose choice 2"
+            echo $opt
+            ;;
+        "/home/dale/Documents/Obsidian-library")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "/home/dale/Documents/wiki-vim")
+            echo "you chose choice $REPLY which is $opt"
+            ;;
+        "Quit")
+            break
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+done

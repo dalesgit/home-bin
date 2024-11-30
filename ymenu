@@ -1,0 +1,5 @@
+#!/bin/bash
+#yad --read-dir=/usr/share/applications --single-click --icons --undecorated --width=1368 --height=768 --center --close-on-unfocus --no-buttons
+#yad --read-dir=/home/dale/.local/share/applications/ --single-click --icons --compact --width=250 --height=500 --center --close-on-unfocus --no-buttons
+yad --read-dir=/home/dale/.local/share/applications/ --single-click --icons --compact --width=250 --height=500 --center 
+

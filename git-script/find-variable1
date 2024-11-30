@@ -1,0 +1,16 @@
+#!/bin/bash
+#USERS=$(awk '{print $1}' ~/bin/git-script/names.txt | sed -e ':a' -e 'N' -e '$!ba' -e 's/\n/!/g')
+NUMS=$(awk '{print $2}' ~/bin/git-script/names.txt )
+
+YAD=$(yad --title="Hello" \
+--form \
+--field="Users:":CB \
+#--field="Nums:":CB \
+"$USERS!New User")
+# https://forum.puppylinux.com/viewtopic.php?t=2838
+# re. getting the variable minus the "|"
+DRIVEPART="`echo $YAD | cut -d "|" -f 1`"
+echo $DRIVEPART
+echo "NUMS = '$NUMS'
+# https://www.geeksforgeeks.org/cut-command-linux-examples/
+# for extracting from the input
