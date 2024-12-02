@@ -1,15 +1,31 @@
 #!/bin/bash
 # https://askubuntu.com/questions/1146166/bash-how-to-create-a-menu-with-submenu
 # submenu
+# gio launch ~/bin/Obsidian.desktop
 Repo="${menu[$option]}"
+function doJoplin(){
+sommelier -X --scale=0.9 --dpi=284 /usr/local/bin/joplin
+}
+function doObsidian (){
+sommelier -X --scale=0.8 --dpi=284  /usr/local/bin/obsidian
+}
+
+function doLogseq (){
+sommelier -X --scale=0.8 --dpi=284 /usr/local/bin/logseq
+
+}
+
 function EchoRepo () {
    echo "You have set this Rep" "$Repo"
+   return
+   clear
 }
 function getStatus(){
    cd $Repo
    echo "Status for $Repo"
    git status 
    return
+   clear
 }
 function gitPull(){
    cd $Repo
@@ -31,9 +47,14 @@ function gitPush(){
    git push origin main
    return
 }
+function doWikivim(){
+   cd ~/Documents/wiki-vim
+   nvim
+   return
+}
 submenu () {
   local PS3='Please enter sub option: '
-  local options=("Set your Repo here" "Which Repo?" "getStatus" "gitPull" "gitAdd" "gitCommit" "gitPush" "Set Repo Submenu quit")
+  local options=("Set your Repo here"  "getStatus" "gitPull" "gitAdd" "gitCommit" "gitPush" "Set Repo Submenu quit")
   local opt
   clear
   select opt in "${options[@]}"
@@ -43,9 +64,6 @@ submenu () {
               echo "Set your Repo here"
               source ~/bin/bash-file-menu4
               ;;
-           "Which Repo?")
-            EchoRepo
-                ;;
             "getStatus")
             getStatus
             ;;
@@ -72,7 +90,7 @@ submenu () {
 
 # main menu
 PS3='Please enter main option: '
-options=("Git Menu" "Main menu quit")
+options=("Git Menu" "edReminders" "WikiVim" "joplin" "logseq" "obsidian" "Main menu quit")
 clear
 select opt in "${options[@]}"
 do
@@ -80,7 +98,21 @@ do
         "Git Menu")
             submenu
             ;;
- 
+         "edReminders")
+            nvim ~/.reminders
+            ;;
+         "WikiVim")
+            doWikivim
+            ;;
+         "joplin")
+           doJoplin
+            ;;
+         "logseq")
+           doLogseq
+            ;;
+         "obsidian")
+           doObsidian
+            ;;
         "Main menu quit")
             exit
             ;;
