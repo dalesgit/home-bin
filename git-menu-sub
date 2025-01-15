@@ -4,14 +4,14 @@
 # gio launch ~/bin/Obsidian.desktop
 Repo="${menu[$option]}"
 function doJoplin(){
-sommelier -X --scale=0.9 --dpi=284 /usr/local/bin/joplin
+joplin
 }
 function doObsidian (){
-sommelier -X --scale=0.8 --dpi=284  /usr/local/bin/obsidian
+obsidian
 }
 
 function doLogseq (){
-sommelier -X --scale=0.8 --dpi=284 /usr/local/bin/logseq
+logseq
 
 }
 
@@ -48,8 +48,8 @@ function gitPush(){
    return
 }
 function doWikivim(){
-   cd ~/Documents/wiki-vim
-   nvim
+   cd ~/Repositories/wiki-vim
+   vim
    return
 }
 submenu () {

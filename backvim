@@ -1,0 +1,4 @@
+#!/usr/bash
+cp -a /home/dale/.config/nvim ~/Documents/back-vim/
+
+
