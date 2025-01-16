@@ -7,13 +7,13 @@
 #
 
 function wikiVim(){
-  cp /home/dale/.vimrc-wiki /home/dale/.vimrc
+#  cp /home/dale/.vimrc-wiki /home/dale/.vimrc
   cd /home/dale/Repositories/wiki-vim
   echo "wiki-vim"
       return
 }
 function wikiLogseq(){
-cp /home/dale/.vimrc-logseq /home/dale/.vimrc
+#cp /home/dale/.vimrc-logseq /home/dale/.vimrc
 cd /home/dale/Repositories/wiki-logseq
 echo "wiki-logseq"
   return 
