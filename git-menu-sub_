@@ -52,34 +52,6 @@ function doWikivim(){
    vim
    return
 }
-submenu2 () {
-    local PS3='Please enter sub option: '
-  local options=("main remind"  "reminder.rem" "reminder-cal.rem" "reminder-bd.rem"  "Remind submenu quit")
-  local opt
-  clear
-  select opt in "${options[@]}"
-     do
-      case $opt in
-          "main remind")
-              codium ~/.reminders
-              ;;
-            "reminder.rem")
-            codium /home/dale/Repositories/wiki-vim/reminders.rem
-            ;;
-            "reminder-cal.rem")
-            codium /home/dale/Repositories/wiki-vim/reminders-cal.rem
-            ;;
-            "reminder-bd.rem")
-            codium /home/dale/Repositories/wiki-vim/reminders-bd.rem
-            ;;
-           "Remind submenu quit")
-              return
-              ;;
-          *) echo "invalid option $REPLY";;
-      esac
- #     clear
-  done
-}
 submenu () {
   local PS3='Please enter sub option: '
   local options=("Set your Repo here"  "getStatus" "gitPull" "gitAdd" "gitCommit" "gitPush" "Set Repo Submenu quit")
@@ -127,7 +99,7 @@ do
             submenu
             ;;
          "edReminders")
-            submenu2
+            nvim ~/.reminders
             ;;
          "WikiVim")
             doWikivim
