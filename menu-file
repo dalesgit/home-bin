@@ -9,7 +9,7 @@ menu[0]=""                   # set and ignore index zero so we can count from 1
 
 while IFS= read -r line; do
   menu[${#menu[@]}]="$line"  # push $line onto $menu[]
-done < ~/Repositories/home-bin/server.list
+done < ~/Repositories/home-bin/repo.list
 
 # function to show the menu
 menu() {
