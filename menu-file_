@@ -6,7 +6,7 @@
 unset option menu ERROR      # prevent inheriting values from the shell
 declare -a menu              # create an array called $menu
 menu[0]=""                   # set and ignore index zero so we can count from 1
-function getRepo(){
+
 while IFS= read -r line; do
   menu[${#menu[@]}]="$line"  # push $line onto $menu[]
 done < ~/Repositories/home-bin/repo.list
@@ -38,59 +38,6 @@ done
 Repo=${menu[$option]}
 #Repo=${menu[$option]}
 echo "You have chosen" "$Repo"
+cd "$Repo"
+exec bash
 return
-}
-function getStatus(){
-   cd $Repo
-   echo "Status for $Repo"
-   git status 
-   return
-}
-function gitPull(){
-   cd $Repo
-   git pull origin main
-   return
-}
-function gitAdd(){
-   cd $Repo
-   git add .
-   return
-}
-function gitCommit(){
-   cd $Repo
-   git commit -m "Lenovo update"
-   return
-}
-function gitPush(){
-   cd $Repo
-   git push origin main
-   return
-}
-while :
- do
-    clear
-    echo "-------------------------------------"
-    echo " Main Menu "
-    echo "-------------------------------------"
-    echo "[1] Get Repo value"
-    echo "[2] Get Status"
-    echo "[3] gitPull"
-    echo "[4] gitAdd"
-    echo "[5] gitCommit"
-    echo "[6] gitPush"
-    echo "[9] Exit/Stop"
-    echo "======================="
-    echo -n "Enter your menu choice [1-8]: "
-    read yourch
-    case $yourch in
-      1) _GetRepo;getRepo ; read ;;
-      2) getStatus;getStatus; read ;;
-      3) gitPull;gitPull; read ;;
-      4) gitAdd;gitAdd; read ;;
-      5) gitCommit;gitCommit; read ;;
-      6) gitPush;gitPush; read ;;
-      9) exit 0 ;;
-      *) echo "Opps!!! Please select choice 1,2,3,4,5,6, or 9";
-         echo "Press a key. . ." ; read ;;
- esac
-done
