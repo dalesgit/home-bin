@@ -1,0 +1,13 @@
+#!/bin/bash
+fromDir1="/home/dale/"
+toDir1="/mnt/chromeos/removable/SD-Card/cruise-25/backup-2"
+fromDir2="/mnt/chromeos/PlayFiles/Documents/"
+toDir2="/mnt/chromeos/removable/SD-Card/cruise-25/backup-3"
+fromDir3="/mnt/chromeos/MyFiles/"
+toDir3="/mnt/chromeos/removable/SD-Card/cruise-25/backup-crostini"
+# rsync -avzP -n --filter="merge /home/dale/bin/merge-filter.txt" "$fromDir1" "$toDir1"
+
+# rsync -avzP --filter="merge /home/dale/bin/merge-filter.txt" "$fromDir1" "$toDir1"
+rsync -rtozP --progress --filter="merge /home/dale/bin/merge-filter.txt" "$fromDir1" "$toDir1"
+rsync -rtozP --progress  --filter="merge /home/dale/bin/merge-filter-2.txt" "$fromDir2" "$toDir2"
+rsync -rtozP --progress --filter="merge /home/dale/bin/merge-filter-3.txt" "$fromDir3" "$toDir3"

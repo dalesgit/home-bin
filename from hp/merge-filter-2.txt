@@ -1,0 +1,5 @@
++ /mnt/chromeos/PlayFiles/Documents/
++ /cruise-android
++ /new-docs
++ /pCloud-keep
+- /mnt/chromeos/PlayFiles/Documents/*
