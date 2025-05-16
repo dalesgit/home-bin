@@ -1,0 +1,70 @@
+#!/bin/bash
+# https://askubuntu.com/questions/1146166/bash-how-to-create-a-menu-with-submenu
+# submenu
+# gio launch ~/bin/Obsidian.desktop
+File="/home/dale/Repositories/vim-config/bin/wikis"
+Repo="${menu[$option]}"
+vimrc="/home/dale/.vimrc"
+# -----
+function doEdit-this (){
+kate $File
+}
+function doCruise (){
+cp "/home/dale/.vimrc-cruise" $vimrc
+cd /home/dale/Repositories/wiki-cruise
+exec bash
+#/home/dale/bin/wikis
+}
+function doWiki (){
+cp "/home/dale/.vimrc-wiki" $vimrc
+#cd /mnt/chromeos/MyFiles/android_files/Documents/wiki-vim
+cd /home/dale/Repositories/wiki-vim
+exec bash
+
+#~/Repositories/wiki-vim
+}
+function doLogseq (){
+cp "/home/dale/.vimrc-logseq" $vimrc
+cd /home/dale/Repositories/logseq
+exec bash
+
+#~/Repositories/logseq
+}
+
+function doSpDir (){
+cp "/home/dale/.vimrc-logseq-sd" $vimrc
+cd /home/dale/Repositories/logseq-sd
+exec bash
+
+#~/Repositories/logseq-sd
+}
+
+# main menu
+PS3='Please enter main option: '
+options=("WikiVim" "doCruise" "Logseq-wiki" "Spiritual Direction wiki" "Edit-this" "Main menu quit")
+clear
+select opt in "${options[@]}"
+do
+    case $opt in
+        "WikiVim")
+        doWiki
+            ;;
+        "doCruise")
+        doCruise
+        ;;
+         "Logseq-wiki")
+         doLogseq
+            ;;
+         "Spiritual Direction wiki")
+            doSpDir
+            ;;
+          "Edit-this")
+          doEdit-this
+          ;;
+          "Main menu quit")
+            exit
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+ #   clear
+done
