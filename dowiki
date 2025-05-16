@@ -1,0 +1,3 @@
+#!/bin/bash
+cd ~/Repositories/wiki-vim
+vim +WikiJournal

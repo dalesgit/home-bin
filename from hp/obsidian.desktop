@@ -1,0 +1,12 @@
+[Desktop Entry]
+Name=Obsidian
+Exec=sommelier -X --scale=0.5 /usr/local/bin/obsidian %U
+Terminal=false
+Type=Application
+Icon=simplenote
+StartupWMClass=Simplenote
+Comment=obsidian is a way to keep notes, lists, ideas and more. Your notes stay in sync with all your devices for free.
+GenericName=Note Taking Application
+StartupNotify=true
+Categories=Utility;
+MimeType=x-scheme-handler/simplenote;

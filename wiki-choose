@@ -1,0 +1,40 @@
+#!/bin/bash
+#$ cat > menuui
+#
+# Script to create simple menus and take action according to that selected
+# menu item
+# function egs
+#
+
+function wikiVim(){
+#  cp /home/dale/.vimrc-wiki /home/dale/.vimrc
+  cd /home/dale/Repositories/wiki-vim
+  echo "wiki-vim"
+      return
+}
+function wikiLogseq(){
+#cp /home/dale/.vimrc-logseq /home/dale/.vimrc
+cd /home/dale/Repositories/wiki-logseq
+echo "wiki-logseq"
+  return 
+}
+# main menu
+PS3='Please enter main option: '
+options=("wikiVim" "wikiLogseq" "Main menu quit")
+clear
+select opt in "${options[@]}"
+do
+    case $opt in
+        wikiVim)
+            ;;
+         wikiLogseq)
+            ;;
+         
+        "Main menu quit")
+            exit
+            ;;
+        *) echo "invalid option $REPLY";;
+    esac
+ #   clear
+done
+

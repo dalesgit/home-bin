@@ -1,15 +1,31 @@
 #!/bin/bash
 # https://askubuntu.com/questions/1146166/bash-how-to-create-a-menu-with-submenu
 # submenu
+# gio launch ~/bin/Obsidian.desktop
 Repo="${menu[$option]}"
+function doJoplin(){
+joplin
+}
+function doObsidian (){
+obsidian
+}
+
+function doLogseq (){
+logseq
+
+}
+
 function EchoRepo () {
    echo "You have set this Rep" "$Repo"
+   return
+   clear
 }
 function getStatus(){
    cd $Repo
    echo "Status for $Repo"
    git status 
    return
+   clear
 }
 function gitPull(){
    cd $Repo
@@ -31,9 +47,42 @@ function gitPush(){
    git push origin main
    return
 }
+function doWikivim(){
+   cd ~/Repositories/wiki-vim
+   vim
+   return
+}
+submenu2 () {
+    local PS3='Please enter sub option: '
+  local options=("main remind"  "reminder.rem" "reminder-cal.rem" "reminder-bd.rem"  "Remind submenu quit")
+  local opt
+  clear
+  select opt in "${options[@]}"
+     do
+      case $opt in
+          "main remind")
+              codium ~/.reminders
+              ;;
+            "reminder.rem")
+            codium /home/dale/Repositories/wiki-vim/reminders.rem
+            ;;
+            "reminder-cal.rem")
+            codium /home/dale/Repositories/wiki-vim/reminders-cal.rem
+            ;;
+            "reminder-bd.rem")
+            codium /home/dale/Repositories/wiki-vim/reminders-bd.rem
+            ;;
+           "Remind submenu quit")
+              return
+              ;;
+          *) echo "invalid option $REPLY";;
+      esac
+ #     clear
+  done
+}
 submenu () {
   local PS3='Please enter sub option: '
-  local options=("Set your Repo here" "Which Repo?" "getStatus" "gitPull" "gitAdd" "gitCommit" "gitPush" "Set Repo Submenu quit")
+  local options=("Set your Repo here"  "getStatus" "gitPull" "gitAdd" "gitCommit" "gitPush" "Set Repo Submenu quit")
   local opt
   clear
   select opt in "${options[@]}"
@@ -43,9 +92,6 @@ submenu () {
               echo "Set your Repo here"
               source ~/bin/bash-file-menu4
               ;;
-           "Which Repo?")
-            EchoRepo
-                ;;
             "getStatus")
             getStatus
             ;;
@@ -72,7 +118,7 @@ submenu () {
 
 # main menu
 PS3='Please enter main option: '
-options=("Git Menu" "Main menu quit")
+options=("Git Menu" "edReminders" "WikiVim" "joplin" "logseq" "obsidian" "Main menu quit")
 clear
 select opt in "${options[@]}"
 do
@@ -80,7 +126,21 @@ do
         "Git Menu")
             submenu
             ;;
- 
+         "edReminders")
+            submenu2
+            ;;
+         "WikiVim")
+            doWikivim
+            ;;
+         "joplin")
+           doJoplin
+            ;;
+         "logseq")
+           doLogseq
+            ;;
+         "obsidian")
+           doObsidian
+            ;;
         "Main menu quit")
             exit
             ;;

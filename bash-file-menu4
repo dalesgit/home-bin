@@ -38,3 +38,4 @@ done
 Repo=${menu[$option]}
 #Repo=${menu[$option]}
 echo "You have chosen" "$Repo"
+return
